@@ -512,26 +512,88 @@ Extract product codes, quantities, prices, and category identifiers from text. R
 Project 88 — Transaction parser
 Extract amounts with currency symbols, ignore unmarked numbers, and mask sensitive account references.
 */
+// let text = "Price $250, tax 30, fee €45, total £120";
+// console.log(text.match(/(?:(\$|€|£))\d+/gi))
+
+// let text = "Account ACC123456 paid $250. Reference ACC987654";
+// console.log(text.replace(/(?<! acc)\d{6,}/gi, "*"));
 
 /*
 Project 89 — Log analyzer
 Separate INFO, WARN, and ERROR lines, find timestamps, and extract messages following a colon.
 */
+// let text = `2026-10-20 09:15:23 INFO: Server started successfully\n2026-10-20 09:16:45 WARN: Disk space is running low\n2026-10-20 09:17:10 ERROR: Database connection failed\n2026-10-20 09:18:05 INFO: User logged in\n2026-10-20 09:19:30 WARN: Response time exceeded threshold\n2026-10-20 09:20:12 ERROR: File upload failed\n2026-10-20 09:21:40 INFO: Backup completed successfully`;
 
+// console.log(text.match(/.*(info|warn|error).*/gim))
+// console.log(text.match(/.+[a-z]: (?<=: ).+[a-z]/gi))
 /*
 Project 90 — Text cleaner and keyword scanner
 Normalize whitespace, find whole-word keywords, remove unwanted punctuation, and extract words based on their surrounding context.
 */
+// let text = `  JavaScript   is             a powerful programming language!\nINFO: User123 logged in successfully.\nWARN: The server   response is slow.\nERROR: Database connection failed at 10:30.\nThe admin user sent 25 requests, but the guest user sent only 5.\nContact: admin@example.com, support@example.com!\nStatus: active; Role: teacher.\nPrice: $250, discount: 15%.
+// `;
+// console.log(text.trim());
+// console.log(text.replace(/^ {2,}$/gim, "-"));
+// console.log(text.match(/user/gi))
+// console.log(text.match(/admin/gi))
+// console.log(text.match(/(info|warn|error)/gi))
+// console.log((text.match(/user/gi)).length)
+// console.log(
+//   text
+//     .replace(/ {2,}/gim, " ")
+//     .replace(/[^\w+]/gim, " ")
+//     .trim(),
+// );
 
 /*
 Continue with these more advanced projects:
 91. URL component extractor: Extract protocol, hostname, and file extension from a list of URLs.
 */
+// let text = `'https://www.google.com',
+// 'https://www.youtube.com',
+// 'https://www.facebook.com,
+// 'https://www.instagram.com,
+// 'https://www.linkedin.com,
+// 'https://github.com,
+// 'https://www.example.com,
+// 'https://shop.example.com/products,
+// 'http://docs.example.org/javascript/regex,
+// 'https://www.example.com/login,
+// 'https://www.example.com/register,
+// 'https://blog.example.com/articles?id=25,
+// 'https://files.example.com/downloads/app.zip,
+// 'https://support.example.org/contact,
+// 'http://localhost:3000,
+// 'http://localhost:4000/api/users,
+// 'www.example',
+// 'https://example.com/about-us'`;
+
+// console.log(text.match(/https/gi));
+// console.log(text.match(/(localhost|www)/gi))
+// console.log(text.match(/\b\.[a-z]*\b/gi))
 
 /*
 92. Invoice field parser: Extract invoice numbers, dates, and totals only when they follow their corresponding labels.
 */
+// let text = `
+// Invoice Number: INV-2026-001
+// Invoice Date: 2026-10-20
+// Invoice Total: $1,250.00
 
+// Customer Name: Abhishek Adhikari
+// Order Number: ORD-5001
+// Date: 2026-10-19
+// Amount: $850.00
+
+// Invoice Number: INV-2026-002
+// Invoice Date: 2026-10-21
+// Invoice Total: $2,499.99
+
+// Invoice Number: INV-2026-003
+// Invoice Date: 2026-10-22
+// Invoice Total: $750.50
+// `;
+// console.log(text.match(/(?<=invoice (number|date|total): )\b.*[a-z-0-9]\b/gi));
 /*
 93. Comment mention parser: Extract @username mentions but avoid matching the username portion of an email address.
 */
